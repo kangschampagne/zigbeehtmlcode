@@ -5,21 +5,26 @@
 	//fetch table rows from mysql db
 	mysql_select_db("zigbee", $connection);
 	mysql_query("SET NAMES utf8");
-
-    //light
-    $light_result = mysql_query("SELECT * FROM zigbee_light WHERE light_id IN (
+    //$lastli = "SELECT MAX(lightintensity) AS lightintensity FROM ZigBee_light";
+    //$result = mysql_query($lastli);
+    //$result = mysql_query("SELECT LAST(employee_id) FROM tbl_employee");
+    $result = mysql_query("SELECT * FROM zigbee_light WHERE light_id IN (
         SELECT max(light_id)  FROM zigbee_light) ");
     //create an array
-    $light_response = array();
-    $light_posts = array();
-    while($light_row =mysql_fetch_assoc($light_result))
+    $response = array();
+    $posts = array();
+    while($row =mysql_fetch_assoc($result))
     {
-        $lightintensity[] = $light_row['lightintensity'];
-        $light_dater[] = $light_row['dater'];
-        $posts = array('lightintensity' => $lightintensity, 'dater' => $light_dater);
+        $lightintensity[] = $row['lightintensity'];
+        $dater[] = $row['dater'];
+        $posts = array('lightintensity' => $lightintensity, 'dater' => $dater);
+        //$rs = $row;
     }
 
-    $light_response['posts'] = $light_posts;
+    $response['posts'] = $posts;
+
+
+
     //Convert PHP Array to JSON String
     //echo json_encode($emparray);
 
