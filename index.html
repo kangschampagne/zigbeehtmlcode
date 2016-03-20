@@ -47,13 +47,11 @@
 		<div class="cards3">
 			<img class="cardimg" src="img/img_fjords.jpg" alt="card1">
 			<div class="cardtext">
-				<p>weiwenweiwen.</p>
-				<p>weiwenweiwen.</p>
-				<p>weiwenweiwen.</p>
-				<p>weiwenweiwen.</p>
-				<p>weiwenweiwen.</p>
-				<p>weiwenweiwen.</p>
-				<p>weiwenweiwen.</p>
+				<p class="card_cn">环境湿度</p>
+				<p class="card_en">Humiduty</p>
+				<p class="humi"></p>
+				<p class="humidate"></p>
+				<p id="datareflash">loding.</p>
 				<label><input class="mui-switch mui-switch-anim" type="checkbox" onclick="buFunction()"></label>
 			</div>
 		</div>
@@ -61,13 +59,11 @@
 		<div class="cards4">
 			<img class="cardimg" src="img/img_fjords.jpg" alt="card1">
 			<div class="cardtext">
-				<p>weiwenweiwen.</p>
-				<p>weiwenweiwen.</p>
-				<p>weiwenweiwen.</p>
-				<p>weiwenweiwen.</p>
-				<p>weiwenweiwen.</p>
-				<p>weiwenweiwen.</p>
-				<p>weiwenweiwen.</p>
+				<p class="card_cn">气体</p>
+				<p class="card_en">Gas</p>
+				<p class="gas"></p>
+				<p class="gasdate"></p>
+				<p id="datareflash">loding.</p>
 				<label><input class="mui-switch mui-switch-anim" type="checkbox" onclick="buFunction()"></label>
 			</div>
 		</div>
@@ -85,9 +81,9 @@
                     dataType: "json",
                     success: function (data) {
                      	$(".light").empty();
-                        $(".light").append(data.posts.lightintensity+" Lx");
+                        $(".light").append(data.light_posts.lightintensity+" Lx");
                         $(".lightdate").empty();
-                        $(".lightdate").append(data.posts.dater);
+                        $(".lightdate").append(data.light_posts.light_dater);
                     }
 			});
 			// Temperature
@@ -96,9 +92,31 @@
                     dataType: "json",
                     success: function (data) {
                         $(".temp").empty();
-                        $(".temp").append(data.tempposts.temperature+" ℃");
+                        $(".temp").append(data.temp_posts.temperature+" ℃");
                         $(".tempdate").empty();
-                        $(".tempdate").append(data.tempposts.dater);
+                        $(".tempdate").append(data.temp_posts.temp_dater);
+                    }
+			});
+			// Humiduty
+			$.ajax({
+                    url:"json/humiduty.json",
+                    dataType: "json",
+                    success: function (data) {
+                        $(".humi").empty();
+                        $(".humi").append(data.humi_posts.humiduty+" %");
+                        $(".humidate").empty();
+                        $(".humidate").append(data.humi_posts.humi_dater);
+                    }
+			});
+			// Gas
+			$.ajax({
+                    url:"json/gas.json",
+                    dataType: "json",
+                    success: function (data) {
+                        $(".gas").empty();
+                        $(".gas").append(data.gas_posts.gas+" ¤");
+                        $(".gasdate").empty();
+                        $(".gasdate").append(data.gas_posts.gas_dater);
                     }
 			});
 		});
