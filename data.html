@@ -3,14 +3,13 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
 	<script type="text/javascript" src="js/echarts.js"></script>
-	<script type="text/javascript" src="js/dynamicdata.js"></script>
 </head>
-	<div id="main" class="dynamicdata" ></div>
+ 	<div id="main" class="dynamicdata" ></div>
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
-
         // 指定图表的配置项和数据
         var option = {
             title: {
@@ -18,20 +17,67 @@
             },
             tooltip: {},
             legend: {
-                data:['销量']
+                data:['销量1']
             },
-            xAxis: {
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-            },
+            xAxis : [
+                {
+                	type : 'category',
+                    data : (function m1(){
+                            	var arr=[];
+                                $.ajax({
+                                url : "json/text.json",
+                                async : false,
+                                data : {},
+                                dataType : "json", 
+                                success : function(data) {
+                                if (data) {
+                                    for(var i=0;i<data.light_posts.light_dater.length;i++){
+                                      console.log(data.light_posts.light_dater[i]);
+                                      arr.push(data.light_posts.light_dater[i]);
+                                    }    
+                                }
+                            	},
+                            	error : function(errorMsg) {
+                                	alert("不好意思，大爷，图表请求数据失败啦!");
+                                	myChart.hideLoading();
+                            	}
+                           		})
+                           		console.log(arr);
+                           		return arr;
+                        	})()
+                }
+            ],
             yAxis: {},
             series: [{
-                name: '销量',
+                name: '销量2',
                 type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
+                data: (function m2(){
+                            	var arr1=[];
+                                $.ajax({
+                                url : "json/text.json",
+                                async : false,
+                                data : {},
+                                dataType : "json", 
+                                success : function(data) {
+                                if (data) {
+                                    for(var i=0;i<data.light_posts.lightintensity.length;i++){
+                                      console.log(data.light_posts.lightintensity[i]);
+                                      arr1.push(data.light_posts.lightintensity[i]);
+                                    }    
+                                }
+                            	},
+                            	error : function(errorMsg) {
+                                	alert("不好意思，大爷，图表请求数据失败啦!");
+                                	myChart.hideLoading();
+                            	}
+                           		})
+                           		console.log(arr1);
+                           		return arr1;
+                        	})()
             }]
         };
 
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
-    </script>
+    </script> 
 </html>

@@ -27,7 +27,7 @@
     //create an array
     $temp_response = array();
     $temp_posts = array();
-    while($light_row =mysql_fetch_assoc($temp_result))
+    while($temp_row =mysql_fetch_assoc($temp_result))
     {
         $temperature[] = $temp_row['temperature'];
         $temp_dater[] = $temp_row['temp_dater'];
