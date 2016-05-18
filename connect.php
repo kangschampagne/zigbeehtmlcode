@@ -1,6 +1,6 @@
 <?php 
-	//connection kangsq zigbee
-	$connection = mysql_connect("localhost:3306","kangsq","kangsq","zigbee") or die("Could not connect: " . mysql_error($connection));
+	//connection kangsq zigbee "120.27.117.224:3306","phonegap" "localhost:3306","kangsq"
+	$connection = mysql_connect("120.27.117.224:3306","phonegap","kangsq","zigbee") or die("Could not connect: " . mysql_error($connection));
 
 	//fetch table rows from mysql db
 	mysql_select_db("zigbee", $connection);
