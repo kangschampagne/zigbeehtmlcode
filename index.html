@@ -1,79 +1,122 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" style="margin-top: -21px;">
 <head>
 	<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> 
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" > 
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<link rel="stylesheet" type="text/css" href="css/button.css">
 	<link rel="stylesheet" type="text/css" href="css/animation.css">
-	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
-
-	<title>ww</title>
+    <script type="text/javascript" src="js/echarts.js"></script>
 	<script src="js/script.js"></script>
+	<title>ww</title>
+	
 </head>
 <body>
-
+	<!-- container -->
 	<div class="container">
-	<label><input class="mui-switch mui-switch-anim" type="checkbox" onclick="buFunction()"></label>
+	<!-- <label><input class="mui-switch mui-switch-anim" type="checkbox" onclick="buFunction()"></label> -->
 	<div id="demo">demo.</div>
 	</div>
 
+	<!-- frist_display -->
+	<div class="frist_display">
+		<div class="cursor"><h1 class="cursor1">IOT Project Based on ZigBee</h1><h1 class="cursor2">CC2530 & ESP8266</h1></div>
+	</div>
+
+	<!-- tabler -->
 	<div class="tabler">
-		
+	<div id="loading" class="boxLoading"></div>
 		<div class="cards1">
-			<img class="cardimg" src="img/img_fjords.jpg" alt="card1">
+			<img class="cardimg" src="img/cards/illumination1.png" alt="card1">
 			<div class="cardtext">
 				<p class="card_cn">光照强度</p>
 				<p class="card_en">Light Intensity</p>
 				<p class="light"></p>
 				<p class="lightdate"></p>
-				<p id="datareflash">loding.</p>
+				<p id="datareflash" ></p>
 				<label><input class="mui-switch mui-switch-anim" type="checkbox" onclick="buFunction()"></label>
 			</div>
 		</div>
-
 		<div class="cards2">
-			<img class="cardimg" src="img/img_fjords.jpg" alt="card1">
+			<img class="cardimg" src="img/cards/medical1.png" alt="card1">
 			<div class="cardtext">
 				<p class="card_cn">环境温度</p>
 				<p class="card_en">Temperature</p>
 				<p class="temp"></p>
 				<p class="tempdate"></p>
+				<p id="datareflash"></p>
 				<label><input class="mui-switch mui-switch-anim" type="checkbox" onclick="buFunction()"></label>
 			</div>
 		</div>
-		
 		<div class="cards3">
-			<img class="cardimg" src="img/img_fjords.jpg" alt="card1">
+			<img class="cardimg" src="img/cards/nature1.png" alt="card1">
 			<div class="cardtext">
 				<p class="card_cn">环境湿度</p>
 				<p class="card_en">Humiduty</p>
 				<p class="humi"></p>
 				<p class="humidate"></p>
-				<p id="datareflash">loding.</p>
+				<p id="datareflash"></p>
 				<label><input class="mui-switch mui-switch-anim" type="checkbox" onclick="buFunction()"></label>
 			</div>
 		</div>
-	
 		<div class="cards4">
-			<img class="cardimg" src="img/img_fjords.jpg" alt="card1">
+			<img class="cardimg" src="img/cards/interface1.png" alt="card1">
 			<div class="cardtext">
 				<p class="card_cn">气体</p>
 				<p class="card_en">Gas</p>
 				<p class="gas"></p>
 				<p class="gasdate"></p>
-				<p id="datareflash">loding.</p>
+				<p id="datareflash"></p>
 				<label><input class="mui-switch mui-switch-anim" type="checkbox" onclick="buFunction()"></label>
 			</div>
 		</div>
-
+	</div>
+	
+	<!-- table_det -->
+	<div class="table_det"><h1 class="det_text">Light Intensity Temperature Humiduty Gas<br>Kang.Roundups Developing&Maintaining</h1></div>
+	
+	<!-- chart_display -->
+	<div class="chart_display">
+	<div class="chart_diapalys">
+		<div class="room_table">
+			<div class="room_page"></div>
+			<div class="room_item">
+				<ul class="room_ul">
+					<li class="room_li"><a href="/">Room1</a></li>
+					<li class="room_li"><a href="/">Room2</a></li>
+					<li class="room_li"><a href="/">Room3</a></li>
+					<li class="room_li"><a href="/">Room4</a></li>
+					<li class="room_li"><a href="/">Room5</a></li>
+					<li class="room_li"><a href="/">Room6</a></li>
+					<li class="room_li"><a href="/">Room7</a></li>
+					<li class="room_li"><a href="/">Room8</a></li>
+				</ul>
+			</div>
+			<div class="room_det">det</div>
+		</div>
+		<div id="chart_temp" class="chart_temp_display"></div>
+	</div>
 	</div>
 
-	<div class="footer">foot.</div>
+	<!-- control_display -->
+	<div class="control_display">
+		<div class="control_det"></div>
+		<div class="control_container">
+			<div class="control_item">1</div>
+			<div class="control_item">2</div>
+			<div class="control_item">3</div>
+			<div class="control_item">4</div>
+		</div>
+	</div>
 
-	<script type="text/javascript"> 
+	<!-- footer -->
+	<div id="footer" class="footer">foot.</div>
+	
+	<!-- connect -->
+	<script type="text/javascript">
 	 function sayHi() {
+	 	document.getElementById("loading").style.display="none";
 		$("#datareflash").load("connect.php",function (){
 			// lightintensity
 			$.ajax({
@@ -124,5 +167,134 @@
 	// $(".light").append( " <b>Light Intensity:</b>" + "<br />" + data.posts.lightintensity + "<br />" + " <b>Date:</b> " + "<br />" + data.posts.dater );
 	setInterval('sayHi()', 5000);
 	</script>
+
+	<!-- chart -->
+	<script type="text/javascript">
+	function sayCa() {
+	$("#footer").load("chart_data/chart_light.php");
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart_temp'));
+        // 指定图表的配置项和数据
+        var option = {
+		    title: {
+		        text: '',
+		        subtext: ''
+		    },
+		    tooltip: {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:['Room1','Room2','Room3','Room4','Room5'],
+		    },
+		    toolbox: {
+		    	// top: 'top',
+		        show: true,
+		        feature: {
+		            dataZoom: {},
+		            dataView: {readOnly: false},
+		            magicType: {type: ['line', 'bar','stack', 'tiled']},
+		            restore: {},
+		            saveAsImage: {}
+		        }
+		    },
+		    xAxis:  {
+		        type: 'category',
+		        boundaryGap: false,
+		        data : (function dater(){
+                            	var arr=[];
+                                $.ajax({
+                                url : "json/chart_temp.json",
+                                async : false,
+                                data : {},
+                                dataType : "json", 
+                                success : function(data) {
+                                if (data) {
+                                    for(var i=0;i<data.temp_posts.temp_dater.length;i++){
+                                      console.log(data.temp_posts.temp_dater[i]);
+                                      arr.push(data.temp_posts.temp_dater[i]);
+                                    }    
+                                }
+                            	},
+                            	error : function(errorMsg) {
+                                	alert("不好意思，大爷，图表请求数据失败啦!");
+                                	myChart.hideLoading();
+                            	}
+                           		})
+                           		console.log(arr);
+                           		return arr;
+                        	})()
+		    },
+		    yAxis: {
+		        type: 'value',
+		        axisLabel: {
+		            formatter: '{value} °C'
+		        }
+		    },
+		    dataZoom: [
+        	{
+	            type: 'slider',
+	            show: true,
+	            xAxisIndex: [0],
+	            start: 0,
+	            end: 25
+        	}],
+		    series: [
+		        {
+		            name:'Room1',
+		            type:'line',
+		            data: (function room1(){
+                            	var arr1=[];
+                                $.ajax({
+                                url : "json/chart_temp.json",
+                                async : false,
+                                data : {},
+                                dataType : "json", 
+                                success : function(data) {
+                                if (data) {
+                                    for(var i=0;i<data.temp_posts.temperature.length;i++){
+                                      console.log(data.temp_posts.temperature[i]);
+                                      arr1.push(data.temp_posts.temperature[i]);
+                                    }    
+                                }
+                            	},
+                           		})
+                           		console.log(arr1);
+                           		return arr1;
+                        	})(),
+		            markPoint: {
+		                data: [
+		                    {type: 'max', name: '最大值'},
+		                    {type: 'min', name: '最小值'}
+		                ]
+		            },
+		            markLine: {
+		                data: [
+		                    {type: 'average', name: '平均值'}
+		                ]
+		            }
+		        },
+		        {
+		            name:'Room2',
+		            type:'line',
+		            data:[26, 27, 24.9, 26.4, 27.6, 24.9, 28, 28.1, 24.6, 24.5, 26, 27, 24.9, 26.4, 27.6, 24.9, 28, 28.1, 24.6, 24.5],
+		            markPoint: {
+		                data: [
+		                    {type: 'max', name: '最大值'},
+		                    {type: 'min', name: '最小值'}
+		                ]
+		            },
+		            markLine: {
+		                data: [
+		                    {type: 'average', name: '平均值'}
+		                ]
+		            }
+		        }
+		    ]
+		};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+    setInterval('sayCa()', 5000);
+    </script> 
 </body>
 </html>

@@ -29,7 +29,7 @@ for (var i = 0; i < 1000; i++) {
     data.push(randomData());
 }
 
-option = {
+var option = {
     title: {
         text: '动态数据 + 时间坐标轴'
     },
@@ -79,5 +79,6 @@ setInterval(function () {
         }]
     });
 }, 1000);
+myChart.setOption(option);
     </script> 
 </html>
