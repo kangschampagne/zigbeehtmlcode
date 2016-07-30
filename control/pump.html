@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" > 
+	<link rel="stylesheet" type="text/css" href="../css/button.css">
+	<script type="text/javascript" src="../js/jquery-2.2.1.min.js"></script>
+	<title>水泵开关</title>
+	<style>
+	.contain {
+		display: -webkit-flex;
+	    display: flex;
+	    align-items: center;
+	    -webkit-justify-content: center;
+		background: url(../img/pump_background.png) center;
+		width: 90%;
+		max-width: 350px;
+		height: 150px;
+		border-radius: 15px;
+	}
+	.flex-container {
+	    display: -webkit-flex;
+	    display: flex;
+	    -webkit-justify-content: center;
+	    justify-content: center;
+	    align-items: center;
+	    width: 90%;
+	    height: 80px;
+	    border: 2px solid #bbb;
+	    max-width: 350px;
+	    border-radius: 15px;
+	    margin-top: 20px;
+	}
+
+	.flex-item {
+	    width: 100px;
+	    margin: 0px;
+	}
+	
+	.lan-container {
+	    display: -webkit-flex;
+	    display: flex;
+	    -webkit-justify-content: center;
+	    justify-content: center;
+	    align-items: center;
+	    width: 90%;
+	    height: 80px;
+	    max-width: 350px;
+	}
+	
+	.len-container {
+	    display: -webkit-flex;
+	    display: flex;
+	    -webkit-flex-direction: column;
+	    flex-direction: column;
+	    border: 2px solid #bbb;
+	    border-radius: 15px;
+	    width: 90%;
+	    max-width: 350px;
+	    margin-top: 20px;
+	}
+
+	.len-item {
+
+	}
+
+	.p_mian {
+		font-family: "华文细黑", "微软雅黑"; 
+		font-size: 24px;
+		font-weight: bold;
+	}
+	.p_item {
+		font-family: "华文细黑", "微软雅黑"; 
+		font-size: 24px;
+	}
+
+	.temp {
+		font-family: "华文细黑", "微软雅黑"; 
+		font-size: 22px;
+	}
+	.tempdate {
+		font-family: "华文细黑", "微软雅黑"; 
+		font-size: 16px;
+	}
+
+	.test {
+		font-family: "华文细黑", "微软雅黑"; 
+		font-size: 22px;
+	}
+	.test1 {
+		font-family: "华文细黑", "微软雅黑"; 
+		font-size: 16px;
+	}
+	
+	</style>
+</head>
+<body>
+	<center>
+	<div class="contain"><p class="p_mian" style="font-size: 35px;">小菜园水泵开关</p></div>
+	<div class="flex-container" id="Border1">
+		<div class="flex-item"><p class="p_mian">水泵①</p></div>
+		<div class="flex-item"><p class="p_item" id="STATE1">已关闭</p></div>
+		<div class="flex-item" style="
+	    margin-top: 3px"><label><input class="mui-switch mui-switch-anim" type="checkbox" onclick="buFunction1()"></label></div>
+	</div>
+	<div class="flex-container" id="Border2">
+		<div class="flex-item"><p class="p_mian">水泵②</p></div>
+		<div class="flex-item"><p class="p_item" id="STATE2">已关闭</p></div>
+		<div class="flex-item" style="
+	    margin-top: 3px"><label><input class="mui-switch mui-switch-anim" type="checkbox" onclick="buFunction2()"></label></div>
+	</div>
+	<div class="len-container">
+		<div class="len-item">
+			<div class="lan-container" >
+				<p id="datareflash"></p>
+				<div class="flex-item"><p class="p_mian">环境温度</p></div>
+				<div class="flex-item"><p class="temp"></p></div>
+				<div class="flex-item"><p class="tempdate"></p></div>
+			</div>
+		</div>
+		<div class="len-item">
+			<div class="lan-container" >
+				<p id="datareflash"></p>
+				<div class="flex-item"><p class="p_mian">土壤湿度</p></div>
+				<div class="flex-item"><p class="test">98.1%</p></div>
+				<div class="flex-item"><p class="test1">2016-07-11 16:47:16</p></div>
+			</div>
+		</div>
+		<div class="len-item">
+			<div class="lan-container" >
+				<p id="datareflash"></p>
+				<div class="flex-item"><p class="p_mian">环境湿度</p></div>
+				<div class="flex-item"><p class="test">67.2%</p></div>
+				<div class="flex-item"><p class="test1">2016-07-11 16:47:18</p></div>
+			</div>
+		</div>
+	</div>
+	</center>
+	<script>
+	var y1 = 0;
+	function buFunction1() {
+		var x1 = document.getElementById("STATE1");
+		var m1 = document.getElementById("Border1");
+		if (y1%2==0){
+		    var xhttp = new XMLHttpRequest();
+		    xhttp.onreadystatechange = function() {
+		    if (xhttp.readyState == 4 && xhttp.status == 200) {
+		      document.getElementById("STATE1").innerHTML = xhttp.responseText;
+		      }
+		    };
+		    m1.style.border = "2px solid #4CAF50";
+		    xhttp.open("GET", "./pump1_ON.php", true);
+		    xhttp.send();
+		    y1++;
+		}
+		else{
+			var xhttp = new XMLHttpRequest();
+		    xhttp.onreadystatechange = function() {
+		    if (xhttp.readyState == 4 && xhttp.status == 200) {
+		      document.getElementById("STATE1").innerHTML = xhttp.responseText;
+		      }
+		    };
+		    m1.style.border = "2px solid rgb(255, 103, 103)";
+		    xhttp.open("GET", "./pump1_OFF.php", true);
+		    xhttp.send();
+			y1++;
+		}
+	}
+
+	var y2 = 0;
+	function buFunction2() {
+		var x2 = document.getElementById("STATE2");
+		var m2 = document.getElementById("Border2");
+		if (y2%2==0){
+		    var xhttp = new XMLHttpRequest();
+		    xhttp.onreadystatechange = function() {
+		    if (xhttp.readyState == 4 && xhttp.status == 200) {
+		      document.getElementById("STATE2").innerHTML = xhttp.responseText;
+		      }
+		    };
+		    m2.style.border = "2px solid #4CAF50"; 
+		    xhttp.open("GET", "./pump2_ON.php", true);
+		    xhttp.send();
+		    y2++;
+		}
+		else{
+			var xhttp = new XMLHttpRequest();
+		    xhttp.onreadystatechange = function() {
+		    if (xhttp.readyState == 4 && xhttp.status == 200) {
+		      document.getElementById("STATE2").innerHTML = xhttp.responseText;
+		      }
+		    };
+		    m2.style.border = "2px solid rgb(255, 103, 103)";
+		    xhttp.open("GET", "./pump2_OFF.php", true);
+		    xhttp.send();
+			y2++;
+		}
+	}
+	</script>
+
+	<script type="text/javascript">
+	 function flash() {
+		$("#datareflash").load("load",function (){
+			// Temperature
+			$.ajax({
+                    url:"../json/esp02_s1_temp.json",
+                    dataType: "json",
+                    success: function (data) {
+                        $(".temp").empty();
+                        $(".temp").append(data.temp_posts.value+"℃");
+                        $(".tempdate").empty();
+                        $(".tempdate").append(data.temp_posts.Date);
+                    }
+			});
+		});
+	};
+	setInterval('flash()', 5000);
+	</script>
+
+</body>
+
+</html>
